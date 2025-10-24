@@ -6,7 +6,7 @@ public class MergeTwoSortedArrays {
 		int n = arr1.length + arr2.length;
 		int arr[] = new int[n];
 		int j = 0;
-		 int k = 0;
+		int k = 0;
 		for(int i = 0; i<n; i++) {
 			if(j>arr1.length-1) {
 				arr[i] = arr2[k];
