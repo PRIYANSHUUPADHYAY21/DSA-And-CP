@@ -1,4 +1,4 @@
-package recursion;
+package _05_recursion;
 
 public class CheckAB {
 	

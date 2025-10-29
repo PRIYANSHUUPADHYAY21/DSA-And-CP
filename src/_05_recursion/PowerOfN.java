@@ -1,4 +1,4 @@
-package recursion;
+package _05_recursion;
 import java.util.Scanner;
 
 public class PowerOfN {
