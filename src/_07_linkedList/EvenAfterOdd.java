@@ -2,7 +2,7 @@ package _07_linkedList;
 
 import java.util.Scanner;
 
-public class AppendLastNToFirst {
+public class EvenAfterOdd {
 	
 	public static Node<Integer> takeInput(){
 		Node<Integer> head = null;
@@ -31,48 +31,51 @@ public class AppendLastNToFirst {
 		}
 	}
 	
-	public static Node<Integer> appendLastNToFirst(Node<Integer> head, int n) {
+	public static Node<Integer> evenAfterOdd(Node<Integer> head) {
 		if(head==null || head.next==null) {
 			return head;
 		}
-		for(int i = 0; i<n; i++) {
-			Node<Integer> temp = head;
-			while(temp.next.next!=null) {
-				temp = temp.next;
-			}
-			temp.next.next = head;
-			head = temp.next;
-			temp.next = null;
-		}
-		return head;
-	}
-	
-	public static Node<Integer> appendLastNToFirst2(Node<Integer> head, int n) {
-		if(head==null ||head.next==null || n<=0) {
-			return head;
-		}
-		int size = 1;
 		Node<Integer> temp = head;
-		while(temp.next!=null) {
-			temp = temp.next;
-			size++;
-		}
-		temp.next = head;
+		Node<Integer> evenHead = null;
+		Node<Integer> oddHead = null;
+		Node<Integer> evenTail = null;
+		Node<Integer> oddTail = null;
 		
-		temp = head;
-		for(int i = 1; i<size-n; i++) {
+		while(temp!=null) {
+			if(temp.data%2==0) {
+				if(evenHead==null) {
+					evenHead = temp;
+					evenTail = temp;
+				}else {
+					evenTail.next = temp;
+					evenTail = temp;
+				}
+			}else {
+				if(oddHead==null) {
+					oddHead = temp;
+					oddTail = temp;
+				}else {
+					oddTail.next = temp;
+					oddTail = temp;
+				}
+			}
 			temp = temp.next;
 		}
-		Node<Integer> newHead = temp.next;
-		temp.next = null;
-		return newHead;
 		
+		if(oddHead==null) {
+			return evenHead;
+		}else {
+			oddTail.next = evenHead;
+			if(evenTail!=null) {
+				evenTail.next = null;
+			}
+			return oddHead;
+		}
 	}
 
 	public static void main(String[] args) {
 		Node<Integer> head = takeInput();
-//		print(head);
-		head = appendLastNToFirst2(head, 2);
+		head = evenAfterOdd(head);
 		print(head);
 
 	}
